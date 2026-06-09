@@ -1,14 +1,13 @@
-name: Build APK
+name: Permanent APK Build
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: gops9/buildozer:latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Buildozer Action
-        uses: kivy/buildozer-action@v1
-        with:
-          buildozer_version: stable
-          command: buildozer android debug
-          repository_root: .
+      - name: Build Android APK with Pre-configured Buildozer
+        run: |
+          buildozer android debug
